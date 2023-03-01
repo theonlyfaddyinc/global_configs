@@ -7,7 +7,7 @@ proxy:
   excludes:
     - ".dev.domain.com"
     - ".qa.domain.com"
-    - ".sit.interac.ca"
+    - ".sit.domain.com"
     - ".prod.domain.com"
 workspace:
   name: "standard-workspace"
