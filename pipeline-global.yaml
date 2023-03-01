@@ -5,14 +5,10 @@ config:
   fileName: "pipeline.yml"
 proxy:
   excludes:
-    - ".dev.interac.ca"
-    - ".dev1.interac.ca"
-    - ".dev2.interac.ca"
-    - ".sit1.interac.ca"
-    - ".sit2.interac.ca"
-    - ".sit3.interac.ca"
-    - ".sit4.interac.ca"
-    - ".sit5.interac.ca"
+    - ".dev.domain.com"
+    - ".qa.domain.com"
+    - ".sit.interac.ca"
+    - ".prod.domain.com"
 workspace:
   name: "standard-workspace"
 color:
@@ -31,13 +27,13 @@ branch:
 delimiter:
   comma: ","
 repository:
-  user: "etjenartif"
+  user: "user1"
   maven:
-    snapshots: "interac-maven-snapshots"
-    releases: "interac-maven-releases"
+    snapshots: "maven-snapshots"
+    releases: "maven-releases"
   docker:
-    snapshots: "interac-docker-snapshots"
-    releases: "interac-docker-releases"
+    snapshots: "docker-snapshots"
+    releases: "docker-releases"
 build:
   tool:
     maven: "maven"
@@ -55,7 +51,7 @@ pipeline:
     rollback: "ROLLBACK"
     deploy: "DEPLOY"
   deploy:
-    repo: "interac/deployments"
+    repo: "domain/deployments"
     config:
       defaultDir: "./src/main/deploy/"
     pattern:
@@ -69,58 +65,28 @@ pipeline:
       # legacy
       esgDeploy: "esg-deploy-ssh"
     platform:
-      # Azure Stack Hub (on-prem, CGI datacenter)
-      ash: "ASH"
-      # OpenShift Cloud (on-prem, CGI datacenter)
-      osc: "OSC"
-      # Azure Public Cloud
-      apc: "APC"
-      # CGI datacenter (on-prem, legacy)
-      cgi: "CGI"
-      #TODO: remove - Oracle Cloud Infrastructure
-      oci: "OCI"
+      azure: "Azure"
+      aws: "AWS"
+      gcp: "Google"
+      onprem: "onprem"
+
     environment:
       dev: "DEV"
-      sim: "SIM"
-      simdev1: "SIMDEV1"
-      dev1: "DEV1"
-      dev2: "DEV2"
-      qasit: "QASIT"
-      qa1: "QA1"
-      simqa1: "SIMQA1"
-      sit1: "SIT1"
-      sit2: "SIT2"
-      sit3: "SIT3"
-      sit4: "SIT4"
-      sit5: "SIT5"
-      perf: "PERF"
-      setest: "SETEST"
-      uat1: "UAT1"
-      uat2: "UAT2"
-      beta: "BETA"
-      fit: "FIT"
-      preprod: "PREPROD"
+      qa: "QA"
+      sit: "SIT"
       prod: "PROD"
-      prodDdcaz2: "PROD_DDCAZ2"
-      prodMdcaz1: "PROD_MDCAZ1"
-      prodAll: "PROD_ALL"
     user:
-      dev: "app_dev"
-      qasit: "app_qasit"
-      perf: "app_perf"
-      setest: "app_perf"
-      beta: "app_beta"
-      fit: "app_fiint"
+      dev: "dev"
       prod: "app_prod"
     param:
       uiSeparator: "____________________________________________________________________________________________________"
   notification:
     email:
       mimeType: "text/html"
-      from: "\"Jenkins\" <jenkins@dev.interac.ca>"
+      from: "\"app1\" <app1@dev.domain.com>"
       recipients:
         validDomains:
-          - "interac.ca"
+          - "domain.com"
   status:
     success:
       code: "SUCCESS"
